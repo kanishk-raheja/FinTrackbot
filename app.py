@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(_name_)
 CORS(app)
 
 # Gemini API configuration
@@ -73,7 +73,7 @@ def chat():
         error_message = str(e)
         print(f"Error: {error_message}")
         print(f"Error type: {type(e)}")
-        print(f"Error details: {e.__dict__ if hasattr(e, '__dict__') else 'No additional details'}")
+        print(f"Error details: {e._dict_ if hasattr(e, '_dict_') else 'No additional details'}")
         
         # Check for rate limit errors
         if "429" in error_message and "quota" in error_message.lower():
@@ -96,6 +96,6 @@ def chat():
                 'error': error_message
             }), 500
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     print(f"Starting Flask server with Gemini API key: {GEMINI_API_KEY[:5]}...")
-    app.run(debug=True, port=5000) 
+    app.run(debug=True, port=5000)
