@@ -58,14 +58,14 @@ if (inputField && sendButton && chatMessages) {
 function addUserMessage(message) {
   const messageDiv = document.createElement("div");
   messageDiv.classList.add("user-message");
-  messageDiv.innerHTML = `<p>${message}</p>`;
+  messageDiv.innerHTML = <p>${message}</p>;
   chatMessages.appendChild(messageDiv);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 function cleanText(text) {
   text = text.replace(/<[^>]*>/g, "");
-  text = text.replace(/\*\*/g, "");
+  text = text.replace(/\\/g, "");
   text = text.replace(/\*/g, "");
   text = text.replace(/#{1,6}\s/g, "");
   text = text.replace(/^\s*[-*]\s/gm, "• ");
@@ -77,7 +77,7 @@ function cleanText(text) {
 
 function formatResponse(text) {
   text = text.replace(/<[^>]*>/g, "");
-  text = text.replace(/\*\*/g, "");
+  text = text.replace(/\\/g, "");
   text = text.replace(/\*/g, "");
 
   let lines = text.split("\n");
@@ -105,7 +105,7 @@ function formatResponse(text) {
       let newIndent = "    ".repeat(indentLevel);
 
       if (/^[•\-\*]/.test(line)) {
-        line = line.replace(/^[•\-\*]\s*/, "• ");
+        line = line.replace(/^[•\-\]\s/, "• ");
       }
 
       formattedLines.push(newIndent + line);
@@ -202,7 +202,7 @@ function sendMessage() {
     .then((response) => {
       if (!response.ok) {
         throw new Error(
-          `Server returned ${response.status}: ${response.statusText}`
+          Server returned ${response.status}: ${response.statusText}
         );
       }
       return response.json();
@@ -232,7 +232,7 @@ function sendMessage() {
           "Unable to connect to the server. Please make sure the server is running and try again."
         );
       } else {
-        addBotMessage(`Error: ${error.message}. Please try again later.`);
+        addBotMessage(Error: ${error.message}. Please try again later.);
       }
       console.error("Error:", error);
     });
@@ -330,7 +330,7 @@ function calculateEMI() {
   }
 
   const EMI = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-  document.getElementById("emi-result").textContent = `Estimated EMI: ₹${EMI.toFixed(2)} per month`;
+  document.getElementById("emi-result").textContent = Estimated EMI: ₹${EMI.toFixed(2)} per month;
 }
 
 function sendToBotEMI() {
@@ -343,7 +343,7 @@ function sendToBotEMI() {
     return;
   }
 
-  const message = `What will be the EMI for a loan of ₹${P} with ${R}% interest over ${Y} years?`;
+  const message = What will be the EMI for a loan of ₹${P} with ${R}% interest over ${Y} years?;
 
   // Set input field and trigger send
   inputField.value = message;
